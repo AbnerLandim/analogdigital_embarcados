@@ -8,6 +8,8 @@
 #define EEPROM_INIT_ERROR 2
 #define PWM_FREQ 16000
 
+void systickWait(int);
+void uDelay(int);
 void enablePulsoLcd(void);
 void initLcd();
 void cmdLcd(char data);

@@ -1,6 +1,6 @@
 #include <tb3bim.h>
 
-void InitPwm(){
+void initPwm(){
     /* M0PWM0 e M0PWM1 usam o elemento 0, isto é, o gerador de frequências 0
      * M0PWM2 e M0PWM3 usam o elemento 1, isto é, o gerador de frequências 1*/
 

@@ -11,16 +11,15 @@ LED4 -> PB5 [M0PWM3]
 
 [04] RS   - PB1
 [05] R/W  - PB0
-[06] E    - PA2  --- era PB5
-[11] DB4  - PB3  --- era PB4
+[06] E    - PA2  --- era PB5 (Já está modificado no código do LCD)
+[11] DB4  - PB3  --- era PB4 (Já está modificado no código do LCD)
 [12] DB5  - PA5
 [13] DB6  - PA6
 [14] DB7  - PA7
 
 TO-DO:
 - Arrumar os contadores do PWM, para que seja possível manipular o duty-cicle de cada saída individualmente (Não tenho certeza se já faz isso)
-- Implementar delay_us()
-- Descobrir se é preciso setar o DIR no PortB para o funcionamento do PWM
+- Descobrir se é preciso setar o DIR no PortB para o funcionamento do PWM (Acredito que não)
 */
 
 #include <tb3bim.h>
@@ -34,10 +33,24 @@ void interruptPortA(){
     }
 }
 
+void systickWait(int delayClock){
+    volatile unsigned long elapsedTime;
+    unsigned long startTime = NVIC_ST_CURRENT_R;
+    do {
+        elapsedTime = (startTime - NVIC_ST_CURRENT_R) & 0x00FFFFFF;
+    } while (elapsedTime <= delayClock);
+}
+
+void uDelay(int delayTime){
+    unsigned long i;
+    for (i = 0; i < delayTime; i++)
+        systickWait(6);
+}
+
 void main(){
     uint32_t i;
 
-    //EEPROM_write(0, 0, g_porcentagem); // Jogar no trataSystick()
+    //EEPROM_write(0, 0, g_porcentagem); //Jogar no trataSystick()
 
     SYSCTL_RCGCGPIO_R = 0x3B; // Habilita os Ports {A, B, D, E, F}
 

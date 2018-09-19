@@ -1,27 +1,27 @@
 #include <tb3bim.h>
 
-void enablePulsoLcdLcd(void){
-    GPIO_PORTB_DATA_R = 0b00100000;
-    delay_us(100000);
-    GPIO_PORTB_DATA_R = 0b00000000;
+void enablePulsoLcd(void){
+    GPIO_PORTA_DATA_R = 0b00000100;
+    uDelay(100000);
+    GPIO_PORTA_DATA_R = 0b00000000;
 }
 
 void initLcd(){
-    SYSCTL_RCGCGPIO_R |= 0b00000011;
-    GPIO_PORTA_DIR_R = 0b11100000;
+    SYSCTL_RCGCGPIO_R |= 0x03;
+    GPIO_PORTA_DIR_R = 0b11100100;
     GPIO_PORTA_DATA_R = 0b00000000;
-    GPIO_PORTA_DEN_R = 0b11100000;
-    GPIO_PORTB_DIR_R = 0b00011011;
-    GPIO_PORTB_DEN_R = 0b00011011;
+    GPIO_PORTA_DEN_R = 0b11100100;
+    GPIO_PORTB_DIR_R = 0b00001011;
     GPIO_PORTB_DATA_R = 0b00000000;
+    GPIO_PORTB_DEN_R = 0b00001011;
 
-    delay_us(20000);
-    GPIO_PORTB_DATA_R = 0b00010000;
+    uDelay(20000);
+    GPIO_PORTB_DATA_R = 0b00001000;
     GPIO_PORTA_DATA_R = 0b00100000;
     enablePulsoLcd();
-    delay_us(5000);
+    uDelay(5000);
     enablePulsoLcd();
-    delay_us(2000);
+    uDelay(2000);
     enablePulsoLcd();
     enablePulsoLcd();
 
@@ -50,7 +50,7 @@ void initLcd(){
     GPIO_PORTB_DATA_R = 0b00000000;
     GPIO_PORTA_DATA_R = 0b00000000;
     enablePulsoLcd();
-    GPIO_PORTB_DATA_R = 0b00010000;
+    GPIO_PORTB_DATA_R = 0b00001000;
     GPIO_PORTA_DATA_R = 0b00000000;
     enablePulsoLcd();
 
@@ -64,10 +64,10 @@ void initLcd(){
 }
 
 void cmdLcd(char data){
-    GPIO_PORTB_DATA_R = data & 0b00010000;
+    GPIO_PORTB_DATA_R = data & 0b00001000;
     GPIO_PORTA_DATA_R = data & 0b11100000;
-    enablePulsoLcdLcd();
-    GPIO_PORTB_DATA_R = data << 4 & 0b00010000;
+    enablePulsoLcd();
+    GPIO_PORTB_DATA_R = data << 4 & 0b00001000;
     GPIO_PORTA_DATA_R = data << 4 & 0b11100000;
-    enablePulsoLcdLcd();
+    enablePulsoLcd();
 }
