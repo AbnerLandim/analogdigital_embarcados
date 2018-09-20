@@ -1,5 +1,7 @@
 #include <tb3bim.h>
 
+extern uint32_t g_porcentagem[];
+
 void initPwm(){
     /* M0PWM0 e M0PWM1 usam o elemento 0, isto é, o gerador de frequências 0
      * M0PWM2 e M0PWM3 usam o elemento 1, isto é, o gerador de frequências 1*/
@@ -18,10 +20,10 @@ void initPwm(){
 
     // Nível baixo em LOAD / Nivel alto em CMPA
     PWM0_0_GENA_R = 0xC8; // PB6
-    PWM0_0_GENB_R = 0xC8; // PB7
+    PWM0_0_GENB_R = 0x308; // PB7
 
     PWM0_1_GENA_R = 0xC8; // PB4
-    PWM0_1_GENB_R = 0xC8; // PB5
+    PWM0_1_GENB_R = 0x308; // PB5
 
     // Valor de frequencia do PWM, em ciclos de clock
     PWM0_0_LOAD_R = PWM_FREQ;

@@ -20,32 +20,14 @@ LED4 -> PB5 [M0PWM3]
 TO-DO:
 - Arrumar os contadores do PWM, para que seja possível manipular o duty-cicle de cada saída individualmente (Não tenho certeza se já faz isso)
 - Descobrir se é preciso setar o DIR no PortB para o funcionamento do PWM (Acredito que não)
+- Fazer a gravação do EEPROM assim que terminar a leitura de um botão
+- Desbloquear o PF0 usando o CR e o LOCK
 */
 
 #include <tb3bim.h>
 
 uint32_t g_tempoSystick = 200000;
 uint32_t g_porcentagem[] = {0, 0, 0, 0};
-
-void interruptPortA(){
-    if ((GPIO_PORTA_RIS_R & 0x04) == 0x04){ // Verificação de qual pino gerou a interrupt
-        GPIO_PORTA_ICR_R = 0x04; // Limpa flag de int do pino que gerou a interrupt
-    }
-}
-
-void systickWait(int delayClock){
-    volatile unsigned long elapsedTime;
-    unsigned long startTime = NVIC_ST_CURRENT_R;
-    do {
-        elapsedTime = (startTime - NVIC_ST_CURRENT_R) & 0x00FFFFFF;
-    } while (elapsedTime <= delayClock);
-}
-
-void uDelay(int delayTime){
-    unsigned long i;
-    for (i = 0; i < delayTime; i++)
-        systickWait(6);
-}
 
 void main(){
     uint32_t i;
@@ -54,7 +36,7 @@ void main(){
 
     SYSCTL_RCGCGPIO_R = 0x3B; // Habilita os Ports {A, B, D, E, F}
 
-    initSysTick();
+    //initSysTick();
     initButt();
     initLcd();
     initPwm();

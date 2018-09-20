@@ -7,7 +7,6 @@ void enablePulsoLcd(void){
 }
 
 void initLcd(){
-    SYSCTL_RCGCGPIO_R |= 0x03;
     GPIO_PORTA_DIR_R = 0b11100100;
     GPIO_PORTA_DATA_R = 0b00000000;
     GPIO_PORTA_DEN_R = 0b11100100;
