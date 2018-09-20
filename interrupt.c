@@ -1,16 +1,5 @@
 #include <tb3bim.h>
 
-/* PINAGEM
-But1 -> PF0 [-]
-But2 -> PF4 [+]
-But3 -> PD0 [Func]
-But4 -> PB2 [Reservado]
-
-LED1 -> PB6 [M0PWM0]
-LED2 -> PB7 [M0PWM1]
-LED3 -> PB4 [M0PWM2]
-LED4 -> PB5 [M0PWM3]*/
-
 void initButt(){
     // PortB - SE NECESSÁRIO
     /*GPIO_PORTB_DIR_R |= 0x04; // {2} é input
@@ -37,6 +26,8 @@ void initButt(){
     // PortF
     GPIO_PORTF_DIR_R |= 0x11; // {0 e 4} são inputs
     GPIO_PORTF_DATA_R = 0x00;
+    GPIO_PORTF_LOCK_R = 0x4C4F434B;
+    GPIO_PORTF_CR_R = 0x01;
     GPIO_PORTF_IS_R = 0x00;
     GPIO_PORTF_IEV_R = 0x00;
     GPIO_PORTF_IBE_R = 0x00;

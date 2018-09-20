@@ -16,6 +16,7 @@ void cmdLcd(char data);
 void initSysTick();
 void initButt();
 void initPwm();
+void gravaEstado();
 uint32_t initEeprom();
 uint32_t EEPROM_read(uint8_t block, uint8_t offset);
 void EEPROM_write(uint8_t block, uint8_t offset, uint32_t word);

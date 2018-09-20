@@ -1,5 +1,13 @@
 #include <tb3bim.h>
 
+extern uint32_t g_porcentagem[];
+
+void gravaEstado(){
+    int i;
+    for (i = 0; i < 4; i++)
+        EEPROM_write(0, 0, g_porcentagem[i]);
+}
+
 uint32_t initEeprom(){
     uint8_t aux;
 

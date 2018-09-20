@@ -11,10 +11,11 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./eeprom.obj" \
-"./init.obj" \
+"./interrupt.obj" \
 "./lcd.obj" \
 "./main.obj" \
 "./pwm.obj" \
+"./systick.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
 "../tm4c123gh6pm.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -159,8 +160,8 @@ pwm-emb.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "eeprom.obj" "init.obj" "lcd.obj" "main.obj" "pwm.obj" "tm4c123gh6pm_startup_ccs.obj" 
-	-$(RM) "eeprom.d" "init.d" "lcd.d" "main.d" "pwm.d" "tm4c123gh6pm_startup_ccs.d" 
+	-$(RM) "eeprom.obj" "interrupt.obj" "lcd.obj" "main.obj" "pwm.obj" "systick.obj" "tm4c123gh6pm_startup_ccs.obj" 
+	-$(RM) "eeprom.d" "interrupt.d" "lcd.d" "main.d" "pwm.d" "systick.d" "tm4c123gh6pm_startup_ccs.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

@@ -18,5 +18,5 @@ void systickWait(int delayClock){
 void uDelay(int delayTime){
     unsigned long i;
     for (i = 0; i < delayTime; i++)
-        systickWait(6);
+        systickWait(16);
 }
